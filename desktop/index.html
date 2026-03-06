@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPTM - Desktop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="splash-mode">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <img class="brand-logo" src="../assets/cptm-logo.svg" alt="Logo CPTM" />
+      <p class="tagline">Plataforma de inspeções</p>
+
+      <nav class="menu">
+        <button class="menu-btn" data-go="login">Login</button>
+        <button class="menu-btn" data-go="home">Home</button>
+        <button class="menu-btn" data-go="inspecao">Nova Inspeção</button>
+        <button class="menu-btn" data-go="historico">Histórico</button>
+      </nav>
+    </aside>
+
+    <main class="workspace">
+      <section class="screen active" id="splash">
+        <div class="hero-box">
+          <img class="hero-logo" src="../assets/cptm-logo.svg" alt="Logo CPTM" />
+          <p class="subtitle">Ambiente de Segurança Operacional</p>
+          <div class="progress-wrap">
+            <div class="progress-fill"></div>
+          </div>
+          <p class="subtitle">Carregando sistema...</p>
+        </div>
+      </section>
+
+      <section class="screen" id="login">
+        <div class="panel narrow">
+          <h2>Entrar</h2>
+          <label for="email">E-mail</label>
+          <input id="email" type="email" value="usuario@cptm.sp.gov.br" />
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" value="123456" />
+          <label class="remember"><input type="checkbox" checked /> Lembrar senha</label>
+          <button class="cta" data-go="home">ENTRAR</button>
+        </div>
+      </section>
+
+      <section class="screen" id="home">
+        <header class="top-line">
+          <h2>Home Dashboard</h2>
+          <span>12/03/2024</span>
+        </header>
+        <div class="grid">
+          <article class="panel">
+            <h3>Resumo</h3>
+            <p>Hoje: 5 inspeções</p>
+            <p>Pendentes: 2</p>
+            <p>Concluídas: 12</p>
+          </article>
+          <article class="panel">
+            <h3>Ações rápidas</h3>
+            <button class="line" data-go="inspecao">Nova Inspeção</button>
+            <button class="line" data-go="historico">Histórico</button>
+            <button class="line">Exportar relatório</button>
+          </article>
+          <article class="panel wide">
+            <h3>Últimas inspeções</h3>
+            <ul>
+              <li>Estação Central, Ar - OK 10:30</li>
+              <li>Estação Norte, Água - Anormal 09:15</li>
+              <li>Estação Sul, Ruído - OK 08:00</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="screen" id="inspecao">
+        <header class="top-line">
+          <h2>Nova Inspeção</h2>
+        </header>
+        <div class="panel">
+          <div class="form-grid">
+            <div>
+              <label>Estação</label>
+              <select>
+                <option>Estação Central</option>
+                <option>Estação Norte</option>
+                <option>Estação Sul</option>
+              </select>
+            </div>
+            <div>
+              <label>Localização</label>
+              <select>
+                <option>Plataforma 1</option>
+                <option>Plataforma 2</option>
+                <option>Saguão</option>
+              </select>
+            </div>
+          </div>
+
+          <label>Tipo</label>
+          <div class="radio-grid">
+            <label><input type="radio" name="tipo" /> Ar</label>
+            <label><input type="radio" name="tipo" checked /> Água</label>
+            <label><input type="radio" name="tipo" /> Solo</label>
+            <label><input type="radio" name="tipo" /> Ruído</label>
+          </div>
+
+          <label>Observações</label>
+          <textarea rows="4" placeholder="Descreva observações da vistoria..."></textarea>
+
+          <div class="row-actions">
+            <button class="line">Anexar Foto</button>
+            <button class="cta" data-go="home">Gravar Inspeção</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="historico">
+        <header class="top-line">
+          <h2>Histórico</h2>
+        </header>
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Estação</th>
+                <th>Tipo</th>
+                <th>Status</th>
+                <th>Hora</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>11/03</td><td>Luz</td><td>Água</td><td>OK</td><td>14:22</td></tr>
+              <tr><td>11/03</td><td>Brás</td><td>Ar</td><td>Alerta</td><td>10:19</td></tr>
+              <tr><td>10/03</td><td>Tatuapé</td><td>Ruído</td><td>OK</td><td>16:05</td></tr>
+              <tr><td>10/03</td><td>Itaquera</td><td>Solo</td><td>OK</td><td>08:47</td></tr>
+            </tbody>
+          </table>
+          <div class="row-actions">
+            <button class="cta" data-go="home">Voltar ao Home</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const screens = document.querySelectorAll('.screen');
+    const menuButtons = document.querySelectorAll('.menu-btn');
+    const goButtons = document.querySelectorAll('[data-go]');
+
+    function showScreen(id) {
+      screens.forEach((screen) => {
+        screen.classList.toggle('active', screen.id === id);
+      });
+
+      document.body.classList.toggle('splash-mode', id === 'splash');
+
+      menuButtons.forEach((button) => {
+        button.classList.toggle('active', button.dataset.go === id);
+      });
+    }
+
+    goButtons.forEach((button) => {
+      button.addEventListener('click', () => showScreen(button.dataset.go));
+    });
+
+    // Exibe splash na abertura e entra automaticamente no sistema.
+    setTimeout(() => showScreen('login'), 2800);
+  </script>
+</body>
+</html>
